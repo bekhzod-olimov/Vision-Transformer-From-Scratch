@@ -32,10 +32,19 @@ for (official_name, official_param), (custom_name, custom_param) in zip(model_of
     # Assert that values of the tensors are equal
     assert_tensors_equal(official_param.data, custom_param.data)
     
+
+# Set an input tensor to the models     
 inp = torch.rand(1, 3, 384, 384)
+
+# Get a timm model output
 official_out = model_official(inp)
+
+# Get a custom model output
 custom_out = model_custom(inp)
 
+# Assertions
 assert get_n_params(model_official) == get_n_params(model_custom)
 assert_tensors_equal(official_out, custom_out)
+
+# Save the model
 torch.save(model_custom, "test.pth")
