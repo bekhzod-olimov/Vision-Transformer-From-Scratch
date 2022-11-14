@@ -259,11 +259,15 @@ class VisionTransformer(nn.Module):
         n_cls        - number of classes in the dataset, int;
         emb_dim      - dimension of the embedding, int;
         depth        - depth of the VIT, int;
-        n_heads      - number of attention heads, int;
+        n_heads      - number of heads of the attention layer, int;
+        mlp_ratio    - mlp ratio value, float;
+        qkv_bias     - query, key, and value bias availability, bool;
+        p            - dropout probability value, float;
+        attn_p      - attention dropout probability, float;
     
     """
     
-    def __init__(self, im_size: int = 384, p_size: int = 16, in_chs: int = 3, n_cls: int = 1000, emb_dim: int = 768, depth: int = 12, n_heads: int = 12, mlp_ratio = 4, qkv_bias = True, p = 0., attn_p = 0.):
+    def __init__(self, im_size: int = 384, p_size: int = 16, in_chs: int = 3, n_cls: int = 1000, emb_dim: int = 768, depth: int = 12, n_heads: int = 12, mlp_ratio: float = 4., qkv_bias = True, p = 0., attn_p = 0.):
         super(VisionTransformer, self).__init__()
         
         self.patch_embed = PatchEmbed(im_size = im_size, p_size = p_size, in_chs = in_chs, emb_dim = emb_dim)
