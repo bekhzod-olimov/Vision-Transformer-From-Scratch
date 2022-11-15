@@ -293,9 +293,21 @@ class VisionTransformer(nn.Module):
         
         # Initialize normalization layer
         self.norm = nn.LayerNorm(normalized_shape = emb_dim, eps = 1e-6)
+        
+        # Classification layer
         self.head = nn.Linear(in_features = emb_dim, out_features = n_cls)
         
-    def forward(self, inp):
+    def forward(self, inp: torch.tensor):
+        
+        """
+        
+        This function conducts feed forward of the VIT model.
+        
+        Argument:
+        
+            inp     - an input volume, tensor
+        
+        """
         
         batch = inp.shape[0]
         inp = self.patch_embed(inp)
