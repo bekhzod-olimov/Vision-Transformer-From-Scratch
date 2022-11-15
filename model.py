@@ -305,7 +305,11 @@ class VisionTransformer(nn.Module):
         
         Argument:
         
-            inp     - an input volume, tensor
+            inp     - an input volume, tensor.
+            
+        Output:
+        
+            out     - an output of the MLP model, tensor.
         
         """
         
@@ -322,4 +326,6 @@ class VisionTransformer(nn.Module):
         inp = self.norm(inp)
         cls_token_out = inp[:, 0] # class token only
         
-        return self.head(cls_token_out)
+        out = self.head(cls_token_out)
+        
+        return out
