@@ -313,11 +313,19 @@ class VisionTransformer(nn.Module):
         
         """
         
+        # Get batch size from the input volume
         batch = inp.shape[0]
+        
+        # Get image patches
         inp = self.patch_embed(inp)
         
+        # Initialize class tokens        
         cls_token = self.cls_token.expand(batch, -1, -1) # (batch, 1, emb_dim)
+        
+        # Concatenate class tokens and patches
         inp = torch.cat((cls_token, inp), dim = 1) # (batch, n_ps + 1, emb_dim)
+        
+        # Add class tokens and position embeddings
         inp = inp + self.pos_embed
         inp = self.pos_drop(inp)
         
