@@ -284,14 +284,16 @@ class VisionTransformer(nn.Module):
         # Initialize dropout for position embedding
         self.pos_drop = nn.Dropout(p = p)
         
+        # Construct VIT blocks based on the depth argument
         self.blocks = nn.ModuleList(
         
             [Block(dim = emb_dim, n_heads = n_heads, mlp_ratio = mlp_ratio, qkv_bias = qkv_bias, p = p, attn_p = attn_p) for _ in range(depth)]
             
         )
         
-        self.norm = nn.LayerNorm(emb_dim, eps = 1e-6)
-        self.head = nn.Linear(emb_dim, n_cls)
+        # Initialize normalization layer
+        self.norm = nn.LayerNorm(normalized_shape = emb_dim, eps = 1e-6)
+        self.head = nn.Linear(in_features = emb_dim, out_features = n_cls)
         
     def forward(self, inp):
         
