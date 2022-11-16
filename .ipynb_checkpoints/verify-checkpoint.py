@@ -1,11 +1,8 @@
 # Import libraries
-import timm, torch, numpy as np
+import timm, torch
 from model import VisionTransformer
+from utils import get_n_params, assert_tensors_equal
 
-def get_n_params(model): return sum(p.numel() for p in model.parameters() if p.requires_grad)
-
-def assert_tensors_equal(t1, t2): np.testing.assert_allclose(t1.detach().numpy(), t2.detach().numpy())
-    
 model_name = "vit_base_patch16_384"
 model_official = timm.create_model(model_name, pretrained = True)
 model_official.eval()
