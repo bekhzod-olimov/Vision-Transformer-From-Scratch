@@ -20,11 +20,16 @@ model_custom = VisionTransformer(**custom_config)
 # Swith to evaluation mode
 model_custom.eval()
 
+
+# Start comparison between a custom model and a timm model
 for (official_name, official_param), (custom_name, custom_param) in zip(model_official.named_parameters(), model_custom.named_parameters()):
     
+    # Assert that number of parameters are the same 
     assert official_param.numel() == custom_param.numel()
     print(f"{official_name} | {custom_name}")
+    
     custom_param.data[:] = official_param.data
+    # Assert that values of the tensors are equal
     assert_tensors_equal(official_param.data, custom_param.data)
     
 inp = torch.rand(1, 3, 384, 384)
