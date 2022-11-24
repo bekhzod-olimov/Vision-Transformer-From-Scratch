@@ -247,7 +247,19 @@ class Block(nn.Module):
     
 class VisionTransformer(nn.Module):
     
-    def __init__(self, im_size = 384, p_size = 16, in_chs = 3, n_cls = 1000, emb_dim = 768, depth = 12, n_heads = 12, mlp_ratio = 4, qkv_bias = True, p = 0., attn_p = 0.):
+    """
+    
+    This class constructs a vision transformer model.
+    
+    Arguments:
+    
+        im_size    - size of an input image, int;
+        p_size     - size of the patch, int;
+        in_chs     - number of channels of an input image, int;
+    
+    """
+    
+    def __init__(self, im_size: int = 384, p_size: int = 16, in_chs: int = 3, n_cls = 1000, emb_dim = 768, depth = 12, n_heads = 12, mlp_ratio = 4, qkv_bias = True, p = 0., attn_p = 0.):
         super(VisionTransformer, self).__init__()
         
         self.patch_embed = PatchEmbed(im_size = im_size, p_size = p_size, in_chs = in_chs, emb_dim = emb_dim)
