@@ -229,17 +229,21 @@ class Block(nn.Module):
         
         Argument:
             
-            inp  - an input volume to the block, tensor;
+            inp  - an input volume to the block, tensor.
             
-            
+        Output:
+        
+            out  - an output volume from the vision transformer block, tensor.
         
         """
         
+        # First norm and attention layers
         inp = inp + self.attn(self.norm1(inp))
-        inp = inp + self.mlp(self.norm2(inp))
         
-        return inp
-    
+        # Second norm and attention layers
+        out = inp + self.mlp(self.norm2(inp))
+        
+        return out
     
 class VisionTransformer(nn.Module):
     
