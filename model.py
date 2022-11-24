@@ -258,10 +258,12 @@ class VisionTransformer(nn.Module):
         in_chs       - number of channels of an input image, int;
         n_cls        - number of classes in the dataset, int;
         emb_dim      - dimension of the embedding, int;
+        depth        - depth of the VIT, int;
+        n_heads      - number of attention heads, int;
     
     """
     
-    def __init__(self, im_size: int = 384, p_size: int = 16, in_chs: int = 3, n_cls: int = 1000, emb_dim: int = 768, depth = 12, n_heads = 12, mlp_ratio = 4, qkv_bias = True, p = 0., attn_p = 0.):
+    def __init__(self, im_size: int = 384, p_size: int = 16, in_chs: int = 3, n_cls: int = 1000, emb_dim: int = 768, depth: int = 12, n_heads: int = 12, mlp_ratio = 4, qkv_bias = True, p = 0., attn_p = 0.):
         super(VisionTransformer, self).__init__()
         
         self.patch_embed = PatchEmbed(im_size = im_size, p_size = p_size, in_chs = in_chs, emb_dim = emb_dim)
