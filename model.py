@@ -221,7 +221,19 @@ class Block(nn.Module):
         # MLP network
         self.mlp = MLP(in_fs = dim, hid_fs = int(dim * mlp_ratio), out_fs = dim)
         
-    def forward(self, inp):
+    def forward(self, inp: torch.tensor):
+        
+        """
+        
+        This function conducts feed forward of the vision transformer block.
+        
+        Argument:
+            
+            inp  - an input volume to the block, tensor;
+            
+            
+        
+        """
         
         inp = inp + self.attn(self.norm1(inp))
         inp = inp + self.mlp(self.norm2(inp))
