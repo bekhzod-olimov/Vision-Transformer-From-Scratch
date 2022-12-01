@@ -141,11 +141,15 @@ class MLP(nn.Module):
     
     Arguments:
     
+        in_fs        - number of input features of an input volume, int;
+        hid_fs       - number of features of a hidden layer, int;
+        out_fs, p=0
+    
         
     
     """
     
-    def __init__(self, in_fs, hid_fs, out_fs, p=0):
+    def __init__(self, in_fs: int, hid_fs: int, out_fs, p=0):
         super(MLP, self).__init__()
         
         self.fc1 = nn.Linear(in_fs, hid_fs)
