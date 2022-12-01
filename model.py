@@ -135,6 +135,16 @@ class Attention(nn.Module):
 
 class MLP(nn.Module):
     
+    """
+    
+    This class constructs multilayer perceptron and passes input through it.
+    
+    Arguments:
+    
+        
+    
+    """
+    
     def __init__(self, in_fs, hid_fs, out_fs, p=0):
         super(MLP, self).__init__()
         
