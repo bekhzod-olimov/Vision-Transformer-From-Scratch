@@ -143,9 +143,8 @@ class MLP(nn.Module):
     
         in_fs        - number of input features of an input volume, int;
         hid_fs       - number of features of a hidden layer, int;
-        out_fs, p=0
-    
-        
+        out_fs       - number of features of the output volume, int;
+        p            - dropout layer probability value, float. 
     
     """
     
