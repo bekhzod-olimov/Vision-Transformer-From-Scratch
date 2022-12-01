@@ -148,13 +148,13 @@ class MLP(nn.Module):
     
     """
     
-    def __init__(self, in_fs: int, hid_fs: int, out_fs, p=0):
+    def __init__(self, in_fs: int, hid_fs: int, out_fs: int, p: float = 0.):
         super(MLP, self).__init__()
         
-        self.fc1 = nn.Linear(in_fs, hid_fs)
+        self.fc1 = nn.Linear(in_features = in_fs, out_features = hid_fs)
         self.act = nn.GELU()
-        self.fc2 = nn.Linear(hid_fs, out_fs)
-        self.drop = nn.Dropout(p)
+        self.fc2 = nn.Linear(in_features = hid_fs, out_features = out_fs)
+        self.drop = nn.Dropout(p = p)
         
     def forward(self, inp):
         
