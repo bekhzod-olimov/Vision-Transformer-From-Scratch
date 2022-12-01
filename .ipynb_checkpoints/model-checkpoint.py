@@ -137,7 +137,7 @@ class MLP(nn.Module):
     
     """
     
-    This class constructs multilayer perceptron and passes input through it.
+    This class constructs multilayer perceptron network and passes input through it.
     
     Arguments:
     
@@ -157,6 +157,20 @@ class MLP(nn.Module):
         self.drop = nn.Dropout(p = p)
         
     def forward(self, inp):
+        
+        """
+        
+        This function conducts feed forward of the MLP network.
+        
+        Argument:
+        
+            inp     - an input volume;
+            
+        Output:
+        
+            out     - an output volume from the MLP network.
+        
+        """
         
         inp = self.fc1(inp) # (batch, n_ps + 1, hid_fs)
         inp = self.act(inp) # (batch, n_ps + 1, hid_fs)
