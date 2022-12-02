@@ -191,6 +191,20 @@ class MLP(nn.Module):
     
 class Block(nn.Module):
     
+    """
+    
+    This class constructs one block of the vision transformer network.
+    
+    Arguments:
+    
+        dim         - attention dimension, int;
+        n_heads     - number of heads of the attention layer, int;
+        qkv_bias    - query, key, and value bias availability, bool;
+        attn_p      - attention dropout probability, float;
+        proj_p      - projection dropout probability, float.
+    
+    """
+    
     def __init__(self, dim, n_heads, mlp_ratio = 4.0, qkv_bias = True, p = 0, attn_p = 0):
         super(Block, self).__init__()
         
