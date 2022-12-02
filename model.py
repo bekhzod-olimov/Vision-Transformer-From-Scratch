@@ -172,13 +172,22 @@ class MLP(nn.Module):
         
         """
         
+        # First linear layer
         inp = self.fc1(inp) # (batch, n_ps + 1, hid_fs)
-        inp = self.act(inp) # (batch, n_ps + 1, hid_fs)
-        inp = self.drop(inp) # (batch, n_ps + 1, hid_fs)
-        inp = self.fc2(inp) # (batch, n_ps + 1, out_fs)
-        inp = self.drop(inp) # (batch, n_ps + 1, out_fs)
         
-        return inp
+        # Apply activation function
+        inp = self.act(inp) # (batch, n_ps + 1, hid_fs)
+        
+        # Apply dropout layer
+        inp = self.drop(inp) # (batch, n_ps + 1, hid_fs)
+        
+        # Second linear layer
+        inp = self.fc2(inp) # (batch, n_ps + 1, out_fs)
+        
+        # Apply dropout layer
+        out = self.drop(inp) # (batch, n_ps + 1, out_fs)
+        
+        return out
     
 class Block(nn.Module):
     
