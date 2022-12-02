@@ -199,13 +199,14 @@ class Block(nn.Module):
     
         dim         - attention dimension, int;
         n_heads     - number of heads of the attention layer, int;
+        mlp_ratio   - mlp ratio value, float;
         qkv_bias    - query, key, and value bias availability, bool;
         attn_p      - attention dropout probability, float;
         proj_p      - projection dropout probability, float.
     
     """
     
-    def __init__(self, dim, n_heads, mlp_ratio = 4.0, qkv_bias = True, p = 0, attn_p = 0):
+    def __init__(self, dim: int, n_heads: int, mlp_ratio: float = 4.0, qkv_bias: bool = True, p: float = 0., attn_p: float = 0.):
         super(Block, self).__init__()
         
         self.norm1 = nn.LayerNorm(dim, eps = 1e-6)
