@@ -98,14 +98,19 @@ class Attention(nn.Module):
         """
         
         batch, n_tokens, dim = inp.shape # inp_shape = (batch, n_ps+1, dim) -> +1 is for the class token as the first token in the sequence
+        assert dim == self.dim, "Input and attention dimensions do not match"
         
-        assert dim == self.dim, "Dimensions do not match"
-        # if dim != self.dim: raise ValueError
-        
+        # Get query, key, and values
         qkv = self.qkv(inp) # (batch, n_ps + 1, 3 * dim)
+        # Reshape the qkv
         qkv = qkv.reshape(batch, n_tokens, 3, self.n_heads, self.head_dim) # (batch, n_ps + 1, 3, n_heads, head_dim) -> 3 is for q,k,v
+        # Permute the qkv
         qkv = qkv.permute(2, 0, 3, 1, 4) # (3, batch, n_heads, n_ps + 1, head_dim)
+        
+        # Get query, key, and values
         q, k, v = qkv[0], qkv[1], qkv[2]
+        
+        # Transpose keys
         k_t = k.transpose(-2, -1) # (batch, n_heads, head_dim, n_ps + 1)
         dp = (q @ k_t) * self.scale # (batch, n_heads, n_ps + 1, n_ps + 1)
         
