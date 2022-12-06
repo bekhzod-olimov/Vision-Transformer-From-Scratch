@@ -112,16 +112,23 @@ class Attention(nn.Module):
         
         # Transpose keys
         k_t = k.transpose(-2, -1) # (batch, n_heads, head_dim, n_ps + 1)
+        
+        # Scaling
         dp = (q @ k_t) * self.scale # (batch, n_heads, n_ps + 1, n_ps + 1)
         
+        # Attention
         attn = dp.softmax(dim = -1) # (batch, n_heads, n_ps + 1, n_ps + 1)
         attn = self.attn_drop(attn)
         
+        # Get weighted average        
         weighted_avg = attn @ v # (batch, n_heads, n_ps + 1, head_dim)
         weighted_avg = weighted_avg.transpose(1, 2) # (batch, n_ps + 1, n_heads, head_dim)
         weighted_avg = weighted_avg.flatten(2) # (batch, n_ps + 1, head_dim)
         
+        # Apply projection
         inp = self.proj(weighted_avg) # (batch, n_ps + 1, dim)
+        
+        # Apply dropout
         out = self.proj_drop(inp) # (batch, n_ps + 1, dim) 
         
         return out
