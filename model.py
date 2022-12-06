@@ -80,7 +80,7 @@ class Attention(nn.Module):
         self.attn_drop = nn.Dropout(p = attn_p)
         self.proj_drop = nn.Dropout(p = proj_p)
         
-    def forward(self, inp):
+    def forward(self, inp: torch.tensor):
         
         """
         
@@ -94,12 +94,13 @@ class Attention(nn.Module):
         
             out    - an output volume after attention is applied, tensor.
         
-        inp_shape = (batch, n_ps+1, dim) -> +1 is for the class token as the first token in the sequence
         
         """
-        batch, n_tokens, dim = inp.shape
         
-        if dim != self.dim: raise ValueError
+        batch, n_tokens, dim = inp.shape # inp_shape = (batch, n_ps+1, dim) -> +1 is for the class token as the first token in the sequence
+        
+        assert dim == self.dim, "Dimensions do not match"
+        # if dim != self.dim: raise ValueError
         
         qkv = self.qkv(inp) # (batch, n_ps + 1, 3 * dim)
         qkv = qkv.reshape(batch, n_tokens, 3, self.n_heads, self.head_dim) # (batch, n_ps + 1, 3, n_heads, head_dim) -> 3 is for q,k,v
