@@ -84,6 +84,16 @@ class Attention(nn.Module):
         
         """
         
+        This function gets an input volume, applies attention layer and returns output with attention applied
+        
+        Argument:
+        
+            inp     - an input volume, tensor;
+            
+        Output:
+        
+            out    - an output volume after attention is applied, tensor.
+        
         inp_shape = (batch, n_ps+1, dim) -> +1 is for the class token as the first token in the sequence
         
         """
