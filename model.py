@@ -12,6 +12,8 @@ class PatchEmbed(nn.Module):
     
         im_size    - input image size, int;
         p_size     - patch size, int;
+        in_chs     - number of channels in an input volume, int;
+        emb_dim    - embedding dimension, int;
     
     """
     
