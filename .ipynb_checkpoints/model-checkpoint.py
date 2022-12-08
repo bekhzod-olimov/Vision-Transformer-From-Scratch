@@ -26,11 +26,19 @@ class PatchEmbed(nn.Module):
         # Initialize a convolution operation for projection 
         self.proj = nn.Conv2d(in_channels = in_chs, out_channels = emb_dim, kernel_size = p_size, stride = p_size)
         
-    def forward(self, inp):
+    def forward(self, inp: torch.tensor):
         
         """
         
         This function gets an input tensor volume and creates patches with a pre-defined embedding dimension.
+        
+        Argument:
+        
+            inp - input volume, tensor;
+            
+        Output:
+        
+            out - output volume from PatchEmbed class, tensor
         
         """
 
