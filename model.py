@@ -15,7 +15,7 @@ class PatchEmbed(nn.Module):
     
     """
     
-    def __init__(self, im_size: int, p_size: int, in_chs = 3, emb_dim = 768):
+    def __init__(self, im_size: int, p_size: int, in_chs: int = 3, emb_dim: int = 768):
         super(PatchEmbed, self).__init__()
         
         self.im_size, self.p_size, self.n_ps = im_size, p_size, (im_size // p_size) ** 2
