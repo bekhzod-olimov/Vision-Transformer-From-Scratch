@@ -20,7 +20,10 @@ class PatchEmbed(nn.Module):
     def __init__(self, im_size: int, p_size: int, in_chs: int = 3, emb_dim: int = 768):
         super(PatchEmbed, self).__init__()
         
+        # Get image size, patch size, and number of patches
         self.im_size, self.p_size, self.n_ps = im_size, p_size, (im_size // p_size) ** 2
+        
+        # Initialize a convolution operation for projection 
         self.proj = nn.Conv2d(in_channels = in_chs, out_channels = emb_dim, kernel_size = p_size, stride = p_size)
         
     def forward(self, inp):
