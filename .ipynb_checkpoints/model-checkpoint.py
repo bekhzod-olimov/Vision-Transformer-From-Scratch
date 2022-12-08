@@ -27,6 +27,12 @@ class PatchEmbed(nn.Module):
         self.proj = nn.Conv2d(in_channels = in_chs, out_channels = emb_dim, kernel_size = p_size, stride = p_size)
         
     def forward(self, inp):
+        
+        """
+        
+        This function gets an input tensor volume and creates patches with a pre-defined embedding dimension.
+        
+        """
 
         inp = self.proj(inp) # (batch, emb_dim, n_ps ** 0.5, n_ps ** 0.5)
         inp = inp.flatten(2) # (batch, emb_dim, n_ps)
