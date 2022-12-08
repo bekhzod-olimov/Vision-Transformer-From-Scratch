@@ -42,9 +42,9 @@ class PatchEmbed(nn.Module):
         
         """
 
-        inp = self.proj(inp)              # (batch, emb_dim, n_ps ** 0.5, n_ps ** 0.5)
-        inp = inp.flatten(start_dim = 2)  # (batch, emb_dim, n_ps)
-        out = inp.transpose(1, 2)         # (batch, n_ps, emb_dim)
+        inp = self.proj(inp)                     # (batch, emb_dim, (n_ps ** 0.5) x 2)
+        inp = inp.flatten(start_dim = 2)         # (batch, emb_dim, n_ps)
+        out = inp.transpose(dim0 = 1, dim1 = 2)  # (batch, n_ps, emb_dim)
 
         return out
         
