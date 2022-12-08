@@ -42,10 +42,11 @@ class PatchEmbed(nn.Module):
         
         """
 
-        inp = self.proj(inp) # (batch, emb_dim, n_ps ** 0.5, n_ps ** 0.5)
-        inp = inp.flatten(2) # (batch, emb_dim, n_ps)
+        inp = self.proj(inp)      # (batch, emb_dim, n_ps ** 0.5, n_ps ** 0.5)
+        inp = inp.flatten(2)      # (batch, emb_dim, n_ps)
+        out = inp.transpose(1, 2) # (batch, n_ps, emb_dim)
 
-        return inp.transpose(1, 2) # (batch, n_ps, emb_dim)
+        return out
         
 class Attention(nn.Module):
     
