@@ -56,12 +56,13 @@ class Attention(nn.Module):
     
     Arguments:
     
-        dim      - attention dimension, int;
-        n_heads  - number of heads of the attention layer, int;
+        dim         - attention dimension, int;
+        n_heads     - number of heads of the attention layer, int;
+        qkv_bias    - query, key, and value bias availability, bool;
     
     """
     
-    def __init__(self, dim: int, n_heads: int = 12, qkv_bias = True, attn_p = 0, proj_p = 0):
+    def __init__(self, dim: int, n_heads: int = 12, qkv_bias: bool = True, attn_p = 0, proj_p = 0):
         super(Attention, self).__init__()
         
         # Reason to use scale is not to feed extremely big values to SoftMax, which can lead to small gradients
