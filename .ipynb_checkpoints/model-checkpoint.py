@@ -75,10 +75,10 @@ class Attention(nn.Module):
         # Reason to use scale is not to feed extremely big values to SoftMax, which can lead to small gradients
         self.n_heads, self.dim, self.head_dim = n_heads, dim, dim // n_heads
         self.scale = self.head_dim ** -0.5
-        self.qkv = nn.Linear(dim, dim * 3, bias = qkv_bias)
-        self.proj = nn.Linear(dim, dim)
-        self.attn_drop = nn.Dropout(attn_p)
-        self.proj_drop = nn.Dropout(proj_p)
+        self.qkv = nn.Linear(in_features = dim, out_features = dim * 3, bias = qkv_bias)
+        self.proj = nn.Linear(in_features = dim, out_features = dim)
+        self.attn_drop = nn.Dropout(p = attn_p)
+        self.proj_drop = nn.Dropout(p = proj_p)
         
     def forward(self, inp):
         
