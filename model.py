@@ -62,7 +62,7 @@ class Attention(nn.Module):
     
     """
     
-    def __init__(self, dim: int, n_heads: int = 12, qkv_bias: bool = True, attn_p = 0, proj_p = 0):
+    def __init__(self, dim: int, n_heads: int = 12, qkv_bias: bool = True, attn_p: float = 0., proj_p: float = 0.):
         super(Attention, self).__init__()
         
         # Reason to use scale is not to feed extremely big values to SoftMax, which can lead to small gradients
