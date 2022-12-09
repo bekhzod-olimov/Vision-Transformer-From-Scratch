@@ -59,6 +59,8 @@ class Attention(nn.Module):
         dim         - attention dimension, int;
         n_heads     - number of heads of the attention layer, int;
         qkv_bias    - query, key, and value bias availability, bool;
+        attn_p      - attention dropout probability, float;
+        proj_p      - projection dropout probability, float.
     
     """
     
