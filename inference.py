@@ -1,11 +1,19 @@
+# Import libraries
+
 from PIL import Image
 import torch, cv2
 from torchvision import transforms as T
 
+# Set k to compute topk accuracy score
 k = 10
 
+# Get class names
 classes = dict(enumerate(open("imagenet_classes.txt")))
+
+# Load a trained model
 model = torch.load("test.pth")
+
+# Switch the model into evaluation mode
 model.eval()
 
 im = Image.open("bear.jpg")
