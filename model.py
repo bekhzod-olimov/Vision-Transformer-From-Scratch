@@ -8,7 +8,7 @@ class PatchEmbed(nn.Module):
     
     This class splits an image into pathces and then embed these patches.
     
-    Arguments:
+    Parameters:
     
         im_size    - input image size, int;
         p_size     - patch size, int;
@@ -32,7 +32,7 @@ class PatchEmbed(nn.Module):
         
         This function gets an input tensor volume and creates patches with a pre-defined embedding dimension.
         
-        Argument:
+        Parameter:
         
             inp - input volume, tensor;
             
@@ -54,7 +54,7 @@ class Attention(nn.Module):
     
     This class creates an attention layer and passes the input volume through it.
     
-    Arguments:
+    Parameters:
     
         dim         - attention dimension, int;
         n_heads     - number of heads of the attention layer, int;
@@ -75,10 +75,8 @@ class Attention(nn.Module):
         # Reason to use scale is not to feed extremely big values to SoftMax, which can lead to small gradients
         self.n_heads, self.dim, self.head_dim = n_heads, dim, dim // n_heads
         self.scale = self.head_dim ** -0.5
-        self.qkv = nn.Linear(in_features = dim, out_features = dim * 3, bias = qkv_bias)
-        self.proj = nn.Linear(in_features = dim, out_features = dim)
-        self.attn_drop = nn.Dropout(p = attn_p)
-        self.proj_drop = nn.Dropout(p = proj_p)
+        self.qkv, self.proj = nn.Linear(in_features = dim, out_features = dim * 3, bias = qkv_bias), nn.Linear(in_features = dim, out_features = dim)
+        self.attn_drop, self.proj_drop = nn.Dropout(p = attn_p), nn.Dropout(p = proj_p)
         
     def forward(self, inp: torch.tensor):
         
@@ -86,7 +84,7 @@ class Attention(nn.Module):
         
         This function gets an input volume, applies attention layer and returns output with attention applied
         
-        Argument:
+        Parameter:
         
             inp     - an input volume, tensor;
             
@@ -139,7 +137,7 @@ class MLP(nn.Module):
     
     This class constructs multilayer perceptron network and passes input through it.
     
-    Arguments:
+    Parameters:
     
         in_fs        - number of input features of an input volume, int;
         hid_fs       - number of features of a hidden layer, int;
@@ -162,7 +160,7 @@ class MLP(nn.Module):
         
         This function conducts feed forward of the MLP network.
         
-        Argument:
+        Parameter:
         
             inp     - an input volume;
             
@@ -195,7 +193,7 @@ class Block(nn.Module):
     
     This class constructs one block of the vision transformer network.
     
-    Arguments:
+    Parameters:
     
         dim         - attention dimension, int;
         n_heads     - number of heads of the attention layer, int;
@@ -227,7 +225,7 @@ class Block(nn.Module):
         
         This function conducts feed forward of the vision transformer block.
         
-        Argument:
+        Parameter:
             
             inp  - an input volume to the block, tensor.
             
@@ -251,7 +249,7 @@ class VisionTransformer(nn.Module):
     
     This class constructs a vision transformer model.
     
-    Arguments:
+    Parameters:
     
         im_size      - size of an input image, int;
         p_size       - size of the patch, int;
@@ -303,7 +301,7 @@ class VisionTransformer(nn.Module):
         
         This function conducts feed forward of the VIT model.
         
-        Argument:
+        Parameter:
         
             inp     - an input volume, tensor.
             
