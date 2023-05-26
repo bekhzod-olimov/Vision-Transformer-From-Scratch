@@ -11,3 +11,9 @@ Double check that the VIT from scratch is implemented correctly by comparing wit
 ```python
 python verify.py
 ```
+
+### Inference with VIT
+Conduct inference with random images from Internet by running this script.
+```python
+python inference.py
+```
