@@ -5,3 +5,9 @@ This repository contains from scratch implemetation, sanity check (with [a timm 
 ```python
 python model.py
 ```
+
+### Verify the model script
+Double check that the VIT from scratch is implemented correctly by comparing with VIT implementation from timm libarary.
+```python
+python verify.py
+```
